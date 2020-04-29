@@ -1,0 +1,40 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: s-ingress
+  namespace: prod
+  annotations:
+    ## Untuk menaikan batas upload file
+    nginx.org/client-max-body-size: "10m"
+    #nginx.ingress.kubernetes.io/rewrite-target: /$2
+    ## Memaksa jalan di https
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+spec:
+  rules:
+
+## Service Location n Characters
+  - host: web.ikhsannugs.xyz
+    http:
+      paths:
+      - 
+        #path:
+        backend:
+          serviceName: landing-page-prod
+          servicePort: 80
+  - host: pesbuk.ikhsannugs.xyz
+    http:
+      paths:
+      -
+        #path:
+        backend:
+          serviceName: pesbuk-prod
+          servicePort: 8000
+  - host: blog.ikhsannugs.xyz
+    http:
+      paths:
+      -
+        #path:
+        backend:
+          serviceName: wordpress-prod
+          servicePort: 8500
+---
